@@ -23,7 +23,7 @@ jobs:
 
     - name: Deploy Subscriber 2 Lambda Function
       run: |
-        zip subscriber2-lambda.zip subscriber2/lambda_function.py
+        zip subscriber2-lambda.zip ./subscriber2/lambda_function.py
         aws lambda update-function-code \
           --function-name Subscriber2Function \
           --zip-file fileb://subscriber2-lambda.zip
