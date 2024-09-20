@@ -1,4 +1,4 @@
-name: Deploy AWS Infrastructure with CloudFormation
+name: Deploy AWS Infrastructure with CloudFormation Template
 
 on:
   push:
