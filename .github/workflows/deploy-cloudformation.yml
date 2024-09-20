@@ -14,11 +14,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: shel
-      run: |
-        pwd
-        ls -lart
-
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -29,6 +24,6 @@ jobs:
     - name: Deploy CloudFormation Stack
       run: |
         aws cloudformation deploy \
-          --template-file ./../infrastructure/cloudformation-template.yaml \
+          --template-file ./infrastructure/cloudformation-template.yml \
           --stack-name aws-pubsub-pattern-stack \
           --capabilities CAPABILITY_NAMED_IAM
