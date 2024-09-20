@@ -24,6 +24,7 @@ jobs:
     - name: Deploy Publisher Lambda Function
       run: |
         zip publisher-lambda.zip ./publisher/lambda_function.py
-        aws lambda update-function-code \
-          --function-name PublisherFunction \
-          --zip-file fileb://publisher-lambda.zip
+        aws s3 cp publisher-lambda.zip s3://devopscloudmentorship/
+        #aws lambda update-function-code \
+        #  --function-name PublisherFunction \
+        #  --zip-file fileb://publisher-lambda.zip
