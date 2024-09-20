@@ -1,4 +1,4 @@
-name: Deploy Subscriber 2 AWS Lambda
+name: Deploy Subscriber 1 AWS Lambda
 
 on:
 #  push:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy-subscriber2:
+  deploy-subscriber1:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,9 +21,9 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ap-south-1
 
-    - name: Deploy Subscriber 2 Lambda Function
+    - name: Deploy Subscriber 1 Lambda Function
       run: |
-        zip subscriber2-lambda.zip lambda_function.py
+        zip subscriber1-lambda.zip subscriber1/lambda_function.py
         aws lambda update-function-code \
-          --function-name Subscriber2Function \
-          --zip-file fileb://subscriber2-lambda.zip
+          --function-name Subscriber1Function \
+          --zip-file fileb://subscriber1-lambda.zip

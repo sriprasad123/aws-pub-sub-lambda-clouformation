@@ -1,4 +1,4 @@
-name: Deploy Publisher AWS Lambda
+name: Deploy Subscriber 2 AWS Lambda
 
 on:
 #  push:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy-publisher:
+  deploy-subscriber2:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,9 +21,9 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ap-south-1
 
-    - name: Deploy Publisher Lambda Function
+    - name: Deploy Subscriber 2 Lambda Function
       run: |
-        zip publisher-lambda.zip lambda_function.py
+        zip subscriber2-lambda.zip subscriber2/lambda_function.py
         aws lambda update-function-code \
-          --function-name PublisherFunction \
-          --zip-file fileb://publisher-lambda.zip
+          --function-name Subscriber2Function \
+          --zip-file fileb://subscriber2-lambda.zip
