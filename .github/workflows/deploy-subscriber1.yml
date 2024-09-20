@@ -24,6 +24,7 @@ jobs:
     - name: Deploy Subscriber 1 Lambda Function
       run: |
         zip subscriber1-lambda.zip ./subscriber1/lambda_function.py
-        aws lambda update-function-code \
-          --function-name Subscriber1Function \
-          --zip-file fileb://subscriber1-lambda.zip
+        aws s3 cp subscriber1-lambda.zip s3://devopscloudmentorship/
+        #aws lambda update-function-code \
+        #  --function-name Subscriber1Function \
+        #  --zip-file fileb://subscriber1-lambda.zip
