@@ -11,9 +11,9 @@ def lambda_handler(event, context):
         # Process each record from the SQS event
         for record in event['Records']:
             message_body = json.loads(record['body'])
-            order_id = message_body.get('orderId')
-            customer_name = message_body.get('customerName')
-            items = message_body.get('items')
+            order_id = json.loads(message_body.get('Message'))['orderId']
+            customer_name = json.loads(message_body.get('Message'))['customerName']
+            items = json.loads(message_body.get('Message'))['items']
 
             if not order_id or not customer_name or not items:
                 raise ValueError('Order ID, Customer Name, or Items are missing in the message.')
