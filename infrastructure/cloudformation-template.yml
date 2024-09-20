@@ -14,11 +14,41 @@ Resources:
     Properties:
       QueueName: MySQSQueue1
 
+  # SQS Queue Policy 1
+  MyQueuePolicy1:
+    Type: AWS::SQS::QueuePolicy
+    Properties:
+      Queues:
+        - !Ref SQSQueue1
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: sns.amazonaws.com
+            Action: SQS:SendMessage
+            Resource: "*"
+
   # SQS Queue 2
   SQSQueue2:
     Type: 'AWS::SQS::Queue'
     Properties:
       QueueName: MySQSQueue2
+
+  # SQS Queue Policy 2
+  MyQueuePolicy2:
+    Type: AWS::SQS::QueuePolicy
+    Properties:
+      Queues:
+        - !Ref SQSQueue2
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: sns.amazonaws.com
+            Action: SQS:SendMessage
+            Resource: "*"
 
   # SNS Subscription to SQS Queue 1
   SNSSubscription1:
@@ -65,6 +95,15 @@ Resources:
       Environment:
         Variables:
           DYNAMODB_TABLE_NAME: MyDynamoDBTable
+          
+  # SQS Triggering Subscriber Lambda1
+  MySQSToLambdaSubcriber1:
+    Type: AWS::Lambda::EventSourceMapping
+    Properties:
+      BatchSize: 10
+      EventSourceArn: !GetAtt SQSQueue1.Arn
+      FunctionName: !GetAtt Subscriber1Lambda.Arn
+      Enabled: True
 
   # Lambda Function for Subscriber 2
   Subscriber2Lambda:
@@ -80,6 +119,15 @@ Resources:
       Environment:
         Variables:
           S3_BUCKET_NAME: "devopscloudmentorship"
+          
+  # SQS Triggering Subscriber Lambda2
+  MySQSToLambdaSubcriber2:
+    Type: AWS::Lambda::EventSourceMapping
+    Properties:
+      BatchSize: 10
+      EventSourceArn: !GetAtt SQSQueue2.Arn
+      FunctionName: !GetAtt Subscriber2Lambda.Arn
+      Enabled: True
 
   # Lambda Execution Role
   LambdaExecutionRole:
@@ -106,6 +154,9 @@ Resources:
                   - sqs:GetQueueAttributes
                   - dynamodb:PutItem
                   - s3:PutObject
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
                 Resource: "*"
 
   # DynamoDB Table for Subscriber 1
