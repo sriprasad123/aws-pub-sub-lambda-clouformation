@@ -29,6 +29,6 @@ jobs:
     - name: Deploy CloudFormation Stack
       run: |
         aws cloudformation deploy \
-          --template-file ./infrastructure/cloudformation-template.yaml \
+          --template-file ./../infrastructure/cloudformation-template.yaml \
           --stack-name aws-pubsub-pattern-stack \
           --capabilities CAPABILITY_NAMED_IAM
