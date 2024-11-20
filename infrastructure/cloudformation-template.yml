@@ -77,6 +77,7 @@ Resources:
         S3Bucket: "devopscloudmentorship"
         S3Key: publisher-lambda.zip
       Runtime: python3.9
+      Timeout: 120
       Environment:
         Variables:
           SNS_TOPIC_ARN: !Ref SNSTopic
@@ -92,18 +93,20 @@ Resources:
         S3Bucket: "devopscloudmentorship"
         S3Key: subscriber1-lambda.zip
       Runtime: python3.9
+      Timeout: 120
       Environment:
         Variables:
           DYNAMODB_TABLE_NAME: MyDynamoDBTable
           
   # SQS Triggering Subscriber Lambda1
-  #MySQSToLambdaSubcriber1:
-  #  Type: AWS::Lambda::EventSourceMapping
-  #  Properties:
-  #    BatchSize: 10
-  #    EventSourceArn: !GetAtt SQSQueue1.Arn
-  #    FunctionName: !GetAtt Subscriber1Lambda.Arn
-  #    Enabled: True
+  MySQSToLambdaSubcriber1:
+    Type: AWS::Lambda::EventSourceMapping
+    Properties:
+      BatchSize: 100
+      BatchWindow: 1
+      EventSourceArn: !GetAtt SQSQueue1.Arn
+      FunctionName: !GetAtt Subscriber1Lambda.Arn
+      Enabled: True
 
   # Lambda Function for Subscriber 2
   Subscriber2Lambda:
@@ -116,18 +119,20 @@ Resources:
         S3Bucket: "devopscloudmentorship"
         S3Key: subscriber2-lambda.zip
       Runtime: python3.9
+      Timeout: 120
       Environment:
         Variables:
           S3_BUCKET_NAME: "devopscloudmentorship"
           
   # SQS Triggering Subscriber Lambda2
-  #MySQSToLambdaSubcriber2:
-  #  Type: AWS::Lambda::EventSourceMapping
-  #  Properties:
-  #    BatchSize: 10
-  #    EventSourceArn: !GetAtt SQSQueue2.Arn
-  #    FunctionName: !GetAtt Subscriber2Lambda.Arn
-  #    Enabled: True
+  MySQSToLambdaSubcriber2:
+    Type: AWS::Lambda::EventSourceMapping
+    Properties:
+      BatchSize: 100
+      BatchWindow: 1
+      EventSourceArn: !GetAtt SQSQueue2.Arn
+      FunctionName: !GetAtt Subscriber2Lambda.Arn
+      Enabled: True
 
   # Lambda Execution Role
   LambdaExecutionRole:
