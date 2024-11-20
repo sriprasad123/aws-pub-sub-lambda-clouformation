@@ -103,7 +103,6 @@ Resources:
     Type: AWS::Lambda::EventSourceMapping
     Properties:
       BatchSize: 100
-      BatchWindow: 1
       EventSourceArn: !GetAtt SQSQueue1.Arn
       FunctionName: !GetAtt Subscriber1Lambda.Arn
       Enabled: True
@@ -129,7 +128,6 @@ Resources:
     Type: AWS::Lambda::EventSourceMapping
     Properties:
       BatchSize: 100
-      BatchWindow: 1
       EventSourceArn: !GetAtt SQSQueue2.Arn
       FunctionName: !GetAtt Subscriber2Lambda.Arn
       Enabled: True
