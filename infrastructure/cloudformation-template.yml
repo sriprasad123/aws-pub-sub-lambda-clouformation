@@ -160,7 +160,7 @@ Resources:
                   - logs:CreateLogGroup
                   - logs:CreateLogStream
                   - logs:PutLogEvents
-                  - s3.GetObject
+                  - s3:GetObject
                 Resource: "*"
 
   # DynamoDB Table for Subscriber 1
