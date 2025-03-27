@@ -74,7 +74,7 @@ Resources:
       Handler: lambda_function.lambda_handler
       Role: !GetAtt LambdaExecutionRole.Arn
       Code:
-        S3Bucket: "terraform-preplaced-state-s3-bucket-subh"
+        S3Bucket: "srini-prasad-bucket"
         S3Key: publisher-lambda.zip
       Runtime: python3.9
       Timeout: 120
@@ -90,7 +90,7 @@ Resources:
       Handler: lambda_function.lambda_handler
       Role: !GetAtt LambdaExecutionRole.Arn
       Code:
-        S3Bucket: "terraform-preplaced-state-s3-bucket-subh"
+        S3Bucket: "srini-prasad-bucket"
         S3Key: subscriber1-lambda.zip
       Runtime: python3.9
       Timeout: 120
@@ -115,13 +115,13 @@ Resources:
       Handler: lambda_function.lambda_handler
       Role: !GetAtt LambdaExecutionRole.Arn
       Code:
-        S3Bucket: "terraform-preplaced-state-s3-bucket-subh"
+        S3Bucket: "srini-prasad-bucket"
         S3Key: subscriber2-lambda.zip
       Runtime: python3.9
       Timeout: 120
       Environment:
         Variables:
-          S3_BUCKET_NAME: "terraform-preplaced-state-s3-bucket-subh"
+          S3_BUCKET_NAME: "srini-prasad-bucket"
           
   # SQS Triggering Subscriber Lambda2
   #MySQSToLambdaSubcriber2:
