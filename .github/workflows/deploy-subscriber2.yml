@@ -24,7 +24,7 @@ jobs:
     - name: Deploy Subscriber 2 Lambda Function
       run: |
         zip -j subscriber2-lambda.zip ./subscriber2/lambda_function.py
-        aws s3 cp subscriber2-lambda.zip s3://terraform-preplaced-state-s3-bucket-subh/
+        aws s3 cp subscriber2-lambda.zip s3://srini-prasad-bucket/
         #aws lambda update-function-code \
         #  --function-name Subscriber2Function \
         #  --zip-file fileb://subscriber2-lambda.zip
